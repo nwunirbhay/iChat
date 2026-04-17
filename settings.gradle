@@ -1,0 +1,43 @@
+pluginManagement {
+    def googleMirror = providers.gradleProperty('GOOGLE_MAVEN_MIRROR').orNull
+    def mavenCentralMirror = providers.gradleProperty('MAVEN_CENTRAL_MIRROR').orNull
+
+    repositories {
+        if (googleMirror != null) {
+            maven { url = uri(googleMirror) }
+        } else {
+            google()
+        }
+
+        if (mavenCentralMirror != null) {
+            maven { url = uri(mavenCentralMirror) }
+        } else {
+            mavenCentral()
+        }
+
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    def googleMirror = providers.gradleProperty('GOOGLE_MAVEN_MIRROR').orNull
+    def mavenCentralMirror = providers.gradleProperty('MAVEN_CENTRAL_MIRROR').orNull
+
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        if (googleMirror != null) {
+            maven { url = uri(googleMirror) }
+        } else {
+            google()
+        }
+
+        if (mavenCentralMirror != null) {
+            maven { url = uri(mavenCentralMirror) }
+        } else {
+            mavenCentral()
+        }
+    }
+}
+
+rootProject.name = 'iChat'
+include ':app'
